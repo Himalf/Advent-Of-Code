@@ -1,18 +1,25 @@
 import fs from "fs";
-const input = fs.readFileSync('input.txt','utf-8')
-// console.log(input)
 
-const splitted = input.split('\r\n').slice(0,2);
-const arr1 =  splitted.map((n)=>n);
-// console.log(arr1)
-// const arrayPart = arr1.slice(0,6)
-// console.log(arrayPart)
+const input = fs.readFileSync('input.txt', 'utf-8');
+const reports = input.trim().split('\n').map(line => line.split(' ').map(Number));
 
-for(var i=0;i<arr1.length;i++){
-    var arrayParts = arr1[i].split(' ')
-    console.log(arrayParts)
+function isSafeReport(levels) {
+    let isIncreasing = true;
+    let isDecreasing = true;
+
+    for (let i = 0; i < levels.length - 1; i++) {
+        const diff = levels[i + 1] - levels[i];
+
+        if (Math.abs(diff) < 1 || Math.abs(diff) > 3) {
+            return false;
+        }
+
+        if (diff < 0) isIncreasing = false;
+        if (diff > 0) isDecreasing = false;
+    }
+
+    return isIncreasing || isDecreasing;
 }
-for(var j=0;j<arr1.length;j++){
-    var isIncreasing = 
-    console.log(isIncreasing)
-}
+const safeReportsCount = reports.filter(isSafeReport).length;
+
+console.log(`Number of safe reports: ${safeReportsCount}`);
