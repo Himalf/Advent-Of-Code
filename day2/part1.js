@@ -20,6 +20,6 @@ function isSafeReport(levels) {
 
     return isIncreasing || isDecreasing;
 }
-const safeReportsCount = reports.filter(isSafeReport).length;
+const safeCounts = reports.filter(isSafeReport).length;
 
-console.log(`Number of safe reports: ${safeReportsCount}`);
+console.log(safeCounts);
